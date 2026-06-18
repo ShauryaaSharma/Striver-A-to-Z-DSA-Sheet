@@ -1,120 +1,75 @@
 #include <iostream>
 #include <algorithm>
-#include <climits>
-#include <unordered_set>
+#include <set>
 using namespace std;
 
-class Solution
-{
-private:
-    bool linear_search(int *A, int n, int num)
-    {
-        for (int i = 0; i < n; i++)
-        {
-            if (A[i] == num)
-            {
+class Solution{
+    private:
+    bool linear_search(int *A, int n, int num){
+        for(int i = 0; i < n; i ++){
+            if(A[i] == num){
                 return true;
             }
         }
         return false;
     }
 
-public:
-    int Approch_1(int *A, int n)
-    {
-        sort(A, A + n);
-        int count = 1;
-        int max_count = 1;
-        for (int i = 0; i < n - 1; i++)
-        {
-            if (A[i] != A[i + 1])
-            {
-                for (int j = i + 1; j < n; j++)
-                {
-                    if (A[i] + 1 == A[j])
-                    {
-                        count++;
-                        break;
-                    }
-                    else
-                    {
-                        count = 1;
-                    }
-                }
-                max_count = max(max_count, count);
+    public:
+    int bruteForce(int *A, int n){
+        sort(A, A+n);
+        int length = 1;
+        int max_length = 1;
+        for(int i = 1; i < n; i ++){
+            if(A[i] == A[i-1] + 1){
+                length ++;
+            }else{
+                length = 1;
             }
+            max_length = max(max_length, length);
+            
         }
-        return max_count;
+        return max_length;
     }
 
-    int Approch_2(int *A, int n)
-    {
-        if (n == 0)
-        {
-            return 0;
-        }
-        int max_count = 1;
-        for (int i = 0; i < n; i++)
-        {
-            int x = A[i];
+    int better_bruteForce(int *A, int n){
+        int longest = 1;
+        for(int i = 0; i < n; i ++){
             int count = 1;
-            while (linear_search(A, n, x + 1) == true)
-            {
-                x += 1;
-                count += 1;
+            while(linear_search(A, n, A[i]) == true){
+                A[i]+1;
+                count ++;
             }
-            max_count = max(max_count, count);
+            longest = max(longest, count);
         }
-        return max_count;
+        return longest;
     }
 
-    int Approch_3(int *A, int n)
-    {
-        int lastSmaller = INT_MIN;
+    int better(int *A, int n){
+        sort(A, A+n);
+        int last_smaller = INT_MAX;
         int count = 0;
         int max_count = 1;
-
-        for (int i = 0; i < n; i++)
-        {
-            if (A[i] - 1 == lastSmaller)
-            {
-                count += 1;
-                lastSmaller = A[i];
+        for(int i = 0; i < n; i ++){
+            if(A[i] - 1 == last_smaller){
+                count++;
+                last_smaller = A[i];
             }
-            else if (A[i] - 1 != lastSmaller)
-            {
+            else if(A[i] != last_smaller){
                 count = 1;
-                lastSmaller = A[i];
+                last_smaller = A[i];
             }
             max_count = max(max_count, count);
         }
         return max_count;
     }
 
-    int Approch_4(int *A, int n){
-        unordered_set<int> mySet;
-        if(n == 0){
-            return 0;
-        }
-
-        int max_count = 0;
-
+    int optimalApproch(int *A, int n){
+        int count = 0;
+        int longest = 0;
+        set<int> mySet;
         for(int i = 0; i < n; i ++){
             mySet.insert(A[i]);
         }
-
-        for( auto element: mySet){
-            if(mySet.find(element - 1) == mySet.end()){
-                int count = 1;
-                int x = element;
-                while(mySet.find(x + 1) != mySet.end()){
-                    count += 1;
-                    x += 1;
-                }
-                max_count = max(max_count, count);
-            }
-        }
-        return max_count;
     }
 };
 
@@ -133,7 +88,7 @@ int main()
     }
 
     Solution s;
-    int result = s.Approch_4(A, n);
+    int result = s.bruteForce(A, n);
 
     cout << result;
 
