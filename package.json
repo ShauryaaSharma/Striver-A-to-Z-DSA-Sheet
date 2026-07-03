@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "lore": "file:../Lore-test-extension-/scribe"
+  }
+}
