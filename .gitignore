@@ -1,3 +1,9 @@
 node_modules/
 .lore.json
+
+# Compiled C/C++ build artifacts
 *.exe
+*.out
+a.out
+solution
+*_linux
