@@ -9,3 +9,15 @@ solution
 *_linux
 practise
 pracise
+
+# Extensionless binaries from the linked list practice files
+creation
+insertion
+deletion
+search
+length
+checkLength
+presentOrNot
+
+# A binary that was accidentally saved with a .cpp extension
+Strings/Basic/Easy/pracise.cpp
