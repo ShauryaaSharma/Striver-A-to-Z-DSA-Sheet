@@ -21,3 +21,20 @@ presentOrNot
 
 # A binary that was accidentally saved with a .cpp extension
 Strings/Basic/Easy/pracise.cpp
+
+# Extensionless binaries from the medium linked list practice files
+adding2
+adding2LL
+addition
+cycleCheck
+intersectionByNode
+intersectionOfLL
+middle
+reverseLL
+sortingByLinks
+sortingLL
+startCycleCheck
+
+# Extensionless binaries from the stack & queue practice files
+StackArray
+para
